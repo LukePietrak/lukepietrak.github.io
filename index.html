@@ -5,6 +5,24 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
+
+	<style>
+			.hover-slideshow {
+				position: relative;
+				aspect-ratio: 16 / 9;
+				background: #1e252d;
+			}
+			.hover-slideshow img {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: opacity 0.6s ease-in-out, transform 0.2s ease-out;
+			}
+		</style>
+
 	<head>
 		<title>Luke Pietrak - Work</title>
 		<meta charset="utf-8" />
@@ -72,7 +90,10 @@
 									<header>
 										<h2><a href="motion_design.html">Motion Design</a></h2>
 									</header>
-									<a href="motion_design.html" class="image fit"><img src="images/pic02.jpg" alt="Motion Design" /></a>
+									<a href="motion_design.html" class="image fit hover-slideshow" data-category="motion-design">
+										<img src="images/pic02.jpg" alt="Motion Design" />
+										<img src="" alt="" aria-hidden="true" />
+									</a>
 									<p>High-fidelity motion graphics and broadcast designs for large-scale displays. Developed in Adobe After Effects utilizing advanced toolsets and plugins.</p>
 									<ul class="actions special">
 										<li><a href="motion_design.html" class="button">See more</a></li>
@@ -82,7 +103,10 @@
 									<header>
 										<h2><a href="video_editing.html">Video Editing</a></h2>
 									</header>
-									<a href="video_editing.html" class="image fit"><img src="images/pic03.jpg" alt="Video Editing" /></a>
+									<a href="video_editing.html" class="image fit hover-slideshow" data-category="video-editing">
+										<img src="images/pic03.jpg" alt="Video Editing" />
+										<img src="" alt="" aria-hidden="true" />
+									</a>
 									<p>Various video edits and independent promotional projects, cut primarily in Adobe Premiere Pro, focusing on precise timing, narrative flow, and high-quality asset delivery.</p>
 									<ul class="actions special">
 										<li><a href="video_editing.html" class="button">See more</a></li>
@@ -92,7 +116,10 @@
 									<header>
 										<h2><a href="3d_animation.html">3D Animation</a></h2>
 									</header>
-									<a href="3d_animation.html" class="image fit"><img src="images/pic04.jpg" alt="3D Animation" /></a>
+									<a href="3d_animation.html" class="image fit hover-slideshow" data-category="3d-animation">
+										<img src="images/pic04.jpg" alt="3D Animation" />
+										<img src="" alt="" aria-hidden="true" />
+									</a>
 									<p>Original 3D modeling, texturing, animating, and rendering workflows. Models are built and rigged using Maya, Blender, and Cinema 4D to create dynamic environments and digital assets.</p>
 									<ul class="actions special">
 										<li><a href="3d_animation.html" class="button">See more</a></li>
@@ -102,7 +129,10 @@
 									<header>
 										<h2><a href="manga_animation.html">Manga Animation</a></h2>
 									</header>
-									<a href="manga_animation.html" class="image fit"><img src="images/pic05.jpg" alt="Manga Animation" /></a>
+									<a href="manga_animation.html" class="image fit hover-slideshow" data-category="manga-animation">
+										<img src="images/pic05.jpg" alt="Manga Animation" />
+										<img src="" alt="" aria-hidden="true" />
+									</a>
 									<p>Static manga panels brought to life through 2D animation. Prepped in Photoshop and composited in After Effects using advanced rotoscoping, track mattes, and spatial interpolation.</p>
 									<ul class="actions special">
 										<li><a href="manga_animation.html" class="button">See more</a></li>
@@ -112,7 +142,10 @@
 									<header>
 										<h2><a href="picture_graphics.html">Picture Graphics</a></h2>
 									</header>
-									<a href="picture_graphics.html" class="image fit"><img src="images/pic06.jpg" alt="Picture Graphics" /></a>
+									<a href="picture_graphics.html" class="image fit hover-slideshow" data-category="picture-graphics">
+										<img src="images/pic06.jpg" alt="Picture Graphics" />
+										<img src="" alt="" aria-hidden="true" />
+									</a>
 									<p>Static visual design, layout composition, and image manipulation. Crafted in Adobe Photoshop and Illustrator to support digital media campaigns and video production assets.</p>
 									<ul class="actions special">
 										<li><a href="picture_graphics.html" class="button">See more</a></li>
@@ -122,7 +155,10 @@
 									<header>
 										<h2><a href="computer_programming.html">Computer Programming</a></h2>
 									</header>
-									<a href="computer_programming.html" class="image fit"><img src="images/pic07.jpg" alt="Computer Programming" /></a>
+									<a href="computer_programming.html" class="image fit hover-slideshow" data-category="computer-programming">
+										<img src="images/pic07.jpg" alt="Computer Programming" />
+										<img src="" alt="" aria-hidden="true" />
+									</a>
 									<p>Custom software development for post-production automation and backend systems. Features Adobe After Effects CEP extensions built with various languages including: HTML/CSS, JavaScript, Java, and Python.</p>
 									<ul class="actions special">
 										<li><a href="computer_programming.html" class="button">See more</a></li>
@@ -196,6 +232,130 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+			(function () {
+				const FIRST_SWITCH_MS = 600;    // Quick first crossfade on hover (set to 2000 for strict 2s delay)
+				const SWITCH_INTERVAL_MS = 2000; // Time between each subsequent photo
+
+				const categoryImages = {
+					"motion-design": [
+						"images/pic02.jpg"
+						// Replace above with your 8 stills, e.g.:
+						// "images/covers/motion_design/1.jpg",
+						// "images/covers/motion_design/2.jpg",
+					],
+					"video-editing": [
+						"images/pic03.jpg"
+					],
+					"3d-animation": [
+						"images/pic04.jpg"
+					],
+					"manga-animation": [
+						"images/pic05.jpg"
+					],
+					"picture-graphics": [
+						"images/graphics/Pearl Habor.png",
+						"images/graphics/New Years (2).png",
+						"images/graphics/Merry Christmas.png",
+						"images/graphics/Honor Remember.png",
+						"images/graphics/Happy Kwanzaa (2).png",
+						"images/graphics/Happy Hanukkah (2).png",
+						"images/graphics/Holiday Parade.png",
+						"images/graphics/Christmas Countdown.png"
+					],
+					"computer-programming": [
+						"images/pic07.jpg"
+					]
+				};
+
+				document.querySelectorAll(".hover-slideshow").forEach(function (box) {
+					const images = categoryImages[box.dataset.category];
+					if (!images || images.length === 0) return;
+
+					const layers = box.querySelectorAll("img");
+					let activeIdx = 0;
+					let currentIndex = Math.floor(Math.random() * images.length);
+					let preloaded = false;
+					let isHovering = false;
+					let startTimeout = null;
+					let cycleInterval = null;
+					let pendingToken = 0;
+
+					// Pick a random starting image on load
+					layers[0].src = images[currentIndex];
+					layers[0].style.opacity = "1";
+					layers[0].style.zIndex = "2";
+					layers[1].style.opacity = "0";
+					layers[1].style.zIndex = "1";
+
+					if (images.length < 2) return;
+
+					function preloadAll() {
+						if (preloaded) return;
+						preloaded = true;
+						images.forEach(function (src) {
+							const img = new Image();
+							img.src = src;
+						});
+					}
+
+					function showNext() {
+						const nextIndex = (currentIndex + 1) % images.length;
+						const nextSrc = images[nextIndex];
+						const token = ++pendingToken;
+
+						const currentLayer = layers[activeIdx];
+						const nextLayer = layers[1 - activeIdx];
+
+						function reveal() {
+							if (!isHovering || token !== pendingToken) return;
+
+							nextLayer.style.transition = "none";
+							nextLayer.style.opacity = "0";
+							nextLayer.style.zIndex = "2";
+							currentLayer.style.zIndex = "1";
+							currentLayer.style.opacity = "1";
+
+							void nextLayer.offsetWidth;
+
+							nextLayer.style.transition = "";
+							nextLayer.style.opacity = "1";
+
+							activeIdx = 1 - activeIdx;
+							currentIndex = nextIndex;
+						}
+
+						if (nextLayer.getAttribute("src") === nextSrc && nextLayer.complete) {
+							reveal();
+						} else {
+							nextLayer.onload = reveal;
+							nextLayer.src = nextSrc;
+						}
+					}
+
+					box.addEventListener("mouseenter", function () {
+						isHovering = true;
+						preloadAll();
+
+						clearTimeout(startTimeout);
+						clearInterval(cycleInterval);
+
+						startTimeout = setTimeout(function () {
+							if (!isHovering) return;
+							showNext();
+							cycleInterval = setInterval(showNext, SWITCH_INTERVAL_MS);
+						}, FIRST_SWITCH_MS);
+					});
+
+					box.addEventListener("mouseleave", function () {
+						isHovering = false;
+						pendingToken++;
+						clearTimeout(startTimeout);
+						clearInterval(cycleInterval);
+					});
+				});
+			})();
+		</script>
 
 	</body>
 </html>
