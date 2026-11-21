@@ -94,7 +94,6 @@
 									<header>
 										<h2><a href="motion_design.html">Motion Design</a></h2>
 									</header>
-									<!-- Update data-starts to the seconds each clip begins, and swap the src path to your .mp4 -->
 									<a href="motion_design.html" class="image fit hover-video" data-starts="0,2,4,6,8,10,12,14">
 										<video muted loop playsinline preload="auto">
 											<source src="images/covers/motion_design.mp4" type="video/mp4" />
@@ -109,9 +108,10 @@
 									<header>
 										<h2><a href="video_editing.html">Video Editing</a></h2>
 									</header>
-									<a href="video_editing.html" class="image fit hover-slideshow" data-category="video-editing">
-										<img src="images/pic03.jpg" alt="Video Editing" />
-										<img src="" alt="" aria-hidden="true" />
+									<a href="video_editing.html" class="image fit hover-video" data-starts="0,2,4,6,8,10,12,14">
+										<video muted loop playsinline preload="auto">
+											<source src="images/covers/video_editing.mp4" type="video/mp4" />
+										</video>
 									</a>
 									<p>Various video edits and independent promotional projects, cut primarily in Adobe Premiere Pro, focusing on precise timing, narrative flow, and high-quality asset delivery.</p>
 									<ul class="actions special">
@@ -122,9 +122,10 @@
 									<header>
 										<h2><a href="3d_animation.html">3D Animation</a></h2>
 									</header>
-									<a href="3d_animation.html" class="image fit hover-slideshow" data-category="3d-animation">
-										<img src="images/pic04.jpg" alt="3D Animation" />
-										<img src="" alt="" aria-hidden="true" />
+									<a href="3d_animation.html" class="image fit hover-video" data-starts="0,2,4,6,8,10,12,14">
+										<video muted loop playsinline preload="auto">
+											<source src="images/covers/3d_animation.mp4" type="video/mp4" />
+										</video>
 									</a>
 									<p>Original 3D modeling, texturing, animating, and rendering workflows. Models are built and rigged using Maya, Blender, and Cinema 4D to create dynamic environments and digital assets.</p>
 									<ul class="actions special">
@@ -135,9 +136,10 @@
 									<header>
 										<h2><a href="manga_animation.html">Manga Animation</a></h2>
 									</header>
-									<a href="manga_animation.html" class="image fit hover-slideshow" data-category="manga-animation">
-										<img src="images/pic05.jpg" alt="Manga Animation" />
-										<img src="" alt="" aria-hidden="true" />
+									<a href="manga_animation.html" class="image fit hover-video" data-starts="0,2,4,6,8,10,12,14">
+										<video muted loop playsinline preload="auto">
+											<source src="images/covers/manga_animation.mp4" type="video/mp4" />
+										</video>
 									</a>
 									<p>Static manga panels brought to life through 2D animation. Prepped in Photoshop and composited in After Effects using advanced rotoscoping, track mattes, and spatial interpolation.</p>
 									<ul class="actions special">
@@ -276,20 +278,11 @@
 						});
 					});
 
-					// 2. Image Crossfade Slideshows (Picture Graphics, etc.)
+					// 2. Image Crossfade Slideshows (Picture Graphics & Computer Programming)
 					const FIRST_SWITCH_MS = 600;
 					const SWITCH_INTERVAL_MS = 2000;
 
 					const categoryImages = {
-						"video-editing": [
-							"images/pic03.jpg"
-						],
-						"3d-animation": [
-							"images/pic04.jpg"
-						],
-						"manga-animation": [
-							"images/pic05.jpg"
-						],
 						"picture-graphics": [
 							"images/graphics/Pearl Habor.png",
 							"images/graphics/New Years (2).png",
