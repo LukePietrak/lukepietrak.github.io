@@ -245,10 +245,16 @@
 			<script src="assets/js/main.js"></script>
 			<script>
 				(function () {
-					// 1. Silent .mp4 Hover Videos
+					const isTouchDevice = window.matchMedia("(hover: none)").matches;
+
+					// 1. Silent .mp4 Hover Videos (Hover on Desktop, Scroll-Play on Mobile)
 					document.querySelectorAll(".hover-video").forEach(function (box) {
 						const video = box.querySelector("video");
 						if (!video) return;
+
+						// Reinforce muted/playsInline properties for iOS Safari autoplay rules
+						video.muted = true;
+						video.playsInline = true;
 
 						const starts = (box.dataset.starts || "0")
 							.split(",")
@@ -272,16 +278,29 @@
 							video.addEventListener("loadedmetadata", setRandomStart, { once: true });
 						}
 
-						box.addEventListener("mouseenter", function () {
-							video.play().catch(function () {});
-						});
+						if (isTouchDevice) {
+							const observer = new IntersectionObserver(function (entries) {
+								entries.forEach(function (entry) {
+									if (entry.isIntersecting) {
+										video.play().catch(function () {});
+									} else {
+										video.pause();
+									}
+								});
+							}, { threshold: 0.45 });
+							observer.observe(box);
+						} else {
+							box.addEventListener("mouseenter", function () {
+								video.play().catch(function () {});
+							});
 
-						box.addEventListener("mouseleave", function () {
-							video.pause();
-						});
+							box.addEventListener("mouseleave", function () {
+								video.pause();
+							});
+						}
 					});
 
-					// 2. Image Crossfade Slideshows (Picture Graphics & Computer Programming)
+					// 2. Image Crossfade Slideshows (Picture Graphics, etc.)
 					const FIRST_SWITCH_MS = 600;
 					const SWITCH_INTERVAL_MS = 2000;
 
@@ -309,7 +328,7 @@
 						let activeIdx = 0;
 						let currentIndex = Math.floor(Math.random() * images.length);
 						let preloaded = false;
-						let isHovering = false;
+						let isActive = false;
 						let startTimeout = null;
 						let cycleInterval = null;
 						let pendingToken = 0;
@@ -340,7 +359,7 @@
 							const nextLayer = layers[1 - activeIdx];
 
 							function reveal() {
-								if (!isHovering || token !== pendingToken) return;
+								if (!isActive || token !== pendingToken) return;
 
 								nextLayer.style.transition = "none";
 								nextLayer.style.opacity = "0";
@@ -365,26 +384,40 @@
 							}
 						}
 
-						box.addEventListener("mouseenter", function () {
-							isHovering = true;
+						function startCycle() {
+							isActive = true;
 							preloadAll();
-
 							clearTimeout(startTimeout);
 							clearInterval(cycleInterval);
-
 							startTimeout = setTimeout(function () {
-								if (!isHovering) return;
+								if (!isActive) return;
 								showNext();
 								cycleInterval = setInterval(showNext, SWITCH_INTERVAL_MS);
 							}, FIRST_SWITCH_MS);
-						});
+						}
 
-						box.addEventListener("mouseleave", function () {
-							isHovering = false;
+						function stopCycle() {
+							isActive = false;
 							pendingToken++;
 							clearTimeout(startTimeout);
 							clearInterval(cycleInterval);
-						});
+						}
+
+						if (isTouchDevice) {
+							const observer = new IntersectionObserver(function (entries) {
+								entries.forEach(function (entry) {
+									if (entry.isIntersecting) {
+										startCycle();
+									} else {
+										stopCycle();
+									}
+								});
+							}, { threshold: 0.45 });
+							observer.observe(box);
+						} else {
+							box.addEventListener("mouseenter", startCycle);
+							box.addEventListener("mouseleave", stopCycle);
+						}
 					});
 				})();
 			</script>
